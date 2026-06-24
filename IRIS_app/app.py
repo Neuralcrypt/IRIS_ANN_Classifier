@@ -6,9 +6,6 @@ import os
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 
-# -------------------------------
-# File Paths
-# -------------------------------
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -27,9 +24,6 @@ LABEL_ENCODER_PATH = os.path.join(
     "label_encoder.pkl"
 )
 
-# -------------------------------
-# Load Model
-# -------------------------------
 
 model = Sequential([
     Dense(16, activation="relu", input_shape=(4,)),
@@ -39,23 +33,16 @@ model = Sequential([
 
 model.load_weights(WEIGHTS_PATH)
 
-# -------------------------------
-# Load Scaler
-# -------------------------------
+
 
 with open(SCALER_PATH, "rb") as f:
     scaler = pickle.load(f)
 
-# -------------------------------
-# Load Label Encoder
-# -------------------------------
 
 with open(LABEL_ENCODER_PATH, "rb") as f:
     label_encoder = pickle.load(f)
 
-# -------------------------------
-# Streamlit UI
-# -------------------------------
+
 
 st.set_page_config(
     page_title="Iris Flower Classifier",
@@ -75,9 +62,6 @@ st.metric(
 
 st.divider()
 
-# -------------------------------
-# Inputs
-# -------------------------------
 
 sepal_length = st.number_input(
     "Sepal Length (cm)",
@@ -107,9 +91,7 @@ petal_width = st.number_input(
     value=0.2
 )
 
-# -------------------------------
-# Prediction
-# -------------------------------
+
 
 if st.button("Predict Species"):
 
